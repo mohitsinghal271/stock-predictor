@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    container_name: quant_dashboard
+    ports:
+      - "8000:8000"
+    environment:
+      - PORT=8000
+    volumes:
+      - ../data_store:/app/data_store
+      - ../reports:/app/reports
+    restart: unless-stopped
+
+  worker:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    container_name: quant_research_worker
+    command: python src/scheduler/autonomous_worker.py
+    environment:
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ../data_store:/app/data_store
+      - ../reports:/app/reports
+    restart: unless-stopped

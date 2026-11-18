@@ -1,0 +1,4 @@
+Timestamp,Symbol,Current_Price,Entry_Trigger,Stop_Loss,Target_1,Target_2,Quantity,Rupee_Risk,Risk_Reward,Strategy_ID,Expiry,Audit_Status
+2026-11-17 11:27:23,KOTAKBANK,496.4,493.92 - 498.88,471.58,531.15,570.86,201,4988.82,1 : 2.0,52W_High_Breakout,Valid for Today (15:15 IST),VERIFIED_LIVE
+2026-11-17 11:27:23,BEML,2087.0,2076.57 - 2097.43,1982.65,2233.09,2400.05,47,4904.45,1 : 2.0,Dual_EMA_Pullback_Retest,Valid for Today (15:15 IST),VERIFIED_LIVE
+2026-11-17 11:27:23,HDFCBANK,818.0,813.91 - 822.09,777.1,875.26,940.7,122,4989.8,1 : 2.0,Dual_EMA_Momentum,Valid for Today (15:15 IST),VERIFIED_LIVE

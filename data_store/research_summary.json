@@ -1,0 +1,512 @@
+{
+  "generated_at": "2026-11-17 10:26:32",
+  "total_simulations": 150,
+  "total_strategies_tested": 15,
+  "accepted_count": 10,
+  "rejected_count": 5,
+  "leaderboard": [
+    {
+      "strategy": "DualEMAMomentum(fast_span=50, slow_span=100, trend_span=200)",
+      "family": "DualEMAMomentum",
+      "in_sample": {
+        "sharpe_ratio": 0.22
+      },
+      "out_of_sample": {
+        "cagr": 0.1551,
+        "total_return": 0.2327,
+        "sharpe_ratio": 0.19,
+        "sortino_ratio": 0.79,
+        "calmar_ratio": 1.74,
+        "max_drawdown": 0.1764,
+        "profit_factor": 2.72,
+        "win_rate": 0.4497,
+        "trade_count": 51,
+        "expectancy": 0.0105
+      },
+      "sharpe_degradation": 0.87,
+      "monte_carlo": {
+        "p50_max_dd": 0.3557,
+        "p95_max_dd": 0.5854,
+        "p99_max_dd": 0.6509,
+        "risk_of_ruin_pct": 14.4
+      },
+      "composite_score": 44.82
+    },
+    {
+      "strategy": "DonchianBreakout(entry_period=50, exit_period=20)",
+      "family": "DonchianBreakout",
+      "in_sample": {
+        "sharpe_ratio": 0.17
+      },
+      "out_of_sample": {
+        "cagr": 0.1205,
+        "total_return": 0.1808,
+        "sharpe_ratio": 0.15,
+        "sortino_ratio": 0.51,
+        "calmar_ratio": 1.14,
+        "max_drawdown": 0.118,
+        "profit_factor": 23.02,
+        "win_rate": 0.4833,
+        "trade_count": 18,
+        "expectancy": 0.0135
+      },
+      "sharpe_degradation": 0.87,
+      "monte_carlo": {
+        "p50_max_dd": 0.2169,
+        "p95_max_dd": 0.3961,
+        "p99_max_dd": 0.4764,
+        "risk_of_ruin_pct": 0.4
+      },
+      "composite_score": 44.45
+    },
+    {
+      "strategy": "VolumeConfirmedBreakout(lookback=50, volume_factor=1.5, exit_ema=50)",
+      "family": "VolumeConfirmedBreakout",
+      "in_sample": {
+        "sharpe_ratio": -0.25
+      },
+      "out_of_sample": {
+        "cagr": 0.0888,
+        "total_return": 0.1331,
+        "sharpe_ratio": -0.21,
+        "sortino_ratio": 0.39,
+        "calmar_ratio": 1.03,
+        "max_drawdown": 0.1013,
+        "profit_factor": 43.55,
+        "win_rate": 0.5714,
+        "trade_count": 11,
+        "expectancy": 0.0214
+      },
+      "sharpe_degradation": 1.0,
+      "monte_carlo": {
+        "p50_max_dd": 0.1763,
+        "p95_max_dd": 0.3403,
+        "p99_max_dd": 0.4289,
+        "risk_of_ruin_pct": 0.0
+      },
+      "composite_score": 44.31
+    },
+    {
+      "strategy": "DualEMAMomentum(fast_span=10, slow_span=30, trend_span=0)",
+      "family": "DualEMAMomentum",
+      "in_sample": {
+        "sharpe_ratio": 0.29
+      },
+      "out_of_sample": {
+        "cagr": 0.1433,
+        "total_return": 0.2149,
+        "sharpe_ratio": 0.25,
+        "sortino_ratio": 0.61,
+        "calmar_ratio": 1.0,
+        "max_drawdown": 0.1672,
+        "profit_factor": 11.96,
+        "win_rate": 0.4681,
+        "trade_count": 61,
+        "expectancy": 0.0121
+      },
+      "sharpe_degradation": 0.87,
+      "monte_carlo": {
+        "p50_max_dd": 0.2636,
+        "p95_max_dd": 0.4708,
+        "p99_max_dd": 0.5584,
+        "risk_of_ruin_pct": 3.0
+      },
+      "composite_score": 43.07
+    },
+    {
+      "strategy": "BollingerMeanReversion(bb_period=20, num_std=2.0, rsi_entry=35.0, rsi_exit=60.0)",
+      "family": "BollingerMeanReversion",
+      "in_sample": {
+        "sharpe_ratio": -1.48
+      },
+      "out_of_sample": {
+        "cagr": -0.0095,
+        "total_return": -0.0143,
+        "sharpe_ratio": -1.29,
+        "sortino_ratio": -0.66,
+        "calmar_ratio": 0.28,
+        "max_drawdown": 0.0736,
+        "profit_factor": 44.53,
+        "win_rate": 0.6111,
+        "trade_count": 16,
+        "expectancy": 0.025
+      },
+      "sharpe_degradation": 1.0,
+      "monte_carlo": {
+        "p50_max_dd": 0.1663,
+        "p95_max_dd": 0.3468,
+        "p99_max_dd": 0.4101,
+        "risk_of_ruin_pct": 0.0
+      },
+      "composite_score": 42.83
+    },
+    {
+      "strategy": "DualEMAMomentum(fast_span=20, slow_span=50, trend_span=200)",
+      "family": "DualEMAMomentum",
+      "in_sample": {
+        "sharpe_ratio": 0.14
+      },
+      "out_of_sample": {
+        "cagr": 0.1401,
+        "total_return": 0.2102,
+        "sharpe_ratio": 0.13,
+        "sortino_ratio": 0.68,
+        "calmar_ratio": 1.52,
+        "max_drawdown": 0.1809,
+        "profit_factor": 13.17,
+        "win_rate": 0.4025,
+        "trade_count": 58,
+        "expectancy": 0.0062
+      },
+      "sharpe_degradation": 0.87,
+      "monte_carlo": {
+        "p50_max_dd": 0.3804,
+        "p95_max_dd": 0.6095,
+        "p99_max_dd": 0.6998,
+        "risk_of_ruin_pct": 19.5
+      },
+      "composite_score": 42.45
+    },
+    {
+      "strategy": "VCPRocketStrategy(atr_fast=14, atr_slow=40, vol_mult=1.5, stop_loss_pct=0.1)",
+      "family": "VCPRocketStrategy",
+      "in_sample": {
+        "sharpe_ratio": -1.42
+      },
+      "out_of_sample": {
+        "cagr": 0.0055,
+        "total_return": 0.0082,
+        "sharpe_ratio": -1.23,
+        "sortino_ratio": -0.73,
+        "calmar_ratio": 0.89,
+        "max_drawdown": 0.0574,
+        "profit_factor": 28.89,
+        "win_rate": 0.3571,
+        "trade_count": 12,
+        "expectancy": 0.0021
+      },
+      "sharpe_degradation": 1.0,
+      "monte_carlo": {
+        "p50_max_dd": 0.1394,
+        "p95_max_dd": 0.2696,
+        "p99_max_dd": 0.3316,
+        "risk_of_ruin_pct": 0.0
+      },
+      "composite_score": 42.0
+    },
+    {
+      "strategy": "RSIMomentumTrend(rsi_period=14, rsi_buy=60.0, rsi_sell=40.0, ema_trend=100)",
+      "family": "RSIMomentumTrend",
+      "in_sample": {
+        "sharpe_ratio": -0.05
+      },
+      "out_of_sample": {
+        "cagr": 0.1011,
+        "total_return": 0.1516,
+        "sharpe_ratio": -0.04,
+        "sortino_ratio": 0.34,
+        "calmar_ratio": 1.06,
+        "max_drawdown": 0.1716,
+        "profit_factor": 14.93,
+        "win_rate": 0.4167,
+        "trade_count": 51,
+        "expectancy": 0.0075
+      },
+      "sharpe_degradation": 1.0,
+      "monte_carlo": {
+        "p50_max_dd": 0.3239,
+        "p95_max_dd": 0.5582,
+        "p99_max_dd": 0.6463,
+        "risk_of_ruin_pct": 9.0
+      },
+      "composite_score": 39.77
+    },
+    {
+      "strategy": "RSIMomentumTrend(rsi_period=14, rsi_buy=55.0, rsi_sell=45.0, ema_trend=50)",
+      "family": "RSIMomentumTrend",
+      "in_sample": {
+        "sharpe_ratio": 0.05
+      },
+      "out_of_sample": {
+        "cagr": 0.0965,
+        "total_return": 0.1448,
+        "sharpe_ratio": 0.05,
+        "sortino_ratio": 0.26,
+        "calmar_ratio": 0.88,
+        "max_drawdown": 0.1514,
+        "profit_factor": 2.32,
+        "win_rate": 0.5055,
+        "trade_count": 77,
+        "expectancy": 0.0155
+      },
+      "sharpe_degradation": 0.87,
+      "monte_carlo": {
+        "p50_max_dd": 0.2771,
+        "p95_max_dd": 0.4731,
+        "p99_max_dd": 0.5833,
+        "risk_of_ruin_pct": 3.5
+      },
+      "composite_score": 29.78
+    },
+    {
+      "strategy": "DonchianBreakout(entry_period=20, exit_period=10)",
+      "family": "DonchianBreakout",
+      "in_sample": {
+        "sharpe_ratio": -0.28
+      },
+      "out_of_sample": {
+        "cagr": 0.0451,
+        "total_return": 0.0677,
+        "sharpe_ratio": -0.25,
+        "sortino_ratio": -0.08,
+        "calmar_ratio": 0.57,
+        "max_drawdown": 0.161,
+        "profit_factor": 2.23,
+        "win_rate": 0.3933,
+        "trade_count": 48,
+        "expectancy": 0.0054
+      },
+      "sharpe_degradation": 1.0,
+      "monte_carlo": {
+        "p50_max_dd": 0.3441,
+        "p95_max_dd": 0.5745,
+        "p99_max_dd": 0.6674,
+        "risk_of_ruin_pct": 13.9
+      },
+      "composite_score": 25.11
+    }
+  ],
+  "rejected": [
+    {
+      "strategy": "VolumeConfirmedBreakout(lookback=20, volume_factor=1.75, exit_ema=20)",
+      "family": "VolumeConfirmedBreakout",
+      "in_sample": {
+        "sharpe_ratio": -1.99
+      },
+      "out_of_sample": {
+        "cagr": -0.0156,
+        "total_return": -0.0234,
+        "sharpe_ratio": -1.73,
+        "sortino_ratio": -0.61,
+        "calmar_ratio": -0.3,
+        "max_drawdown": 0.0708,
+        "profit_factor": 0.8,
+        "win_rate": 0.1111,
+        "trade_count": 17,
+        "expectancy": -0.02
+      },
+      "sharpe_degradation": 1.0,
+      "monte_carlo": {
+        "p50_max_dd": 0.1877,
+        "p95_max_dd": 0.3168,
+        "p99_max_dd": 0.3592,
+        "risk_of_ruin_pct": 0.0
+      },
+      "composite_score": 9.31,
+      "rejection_reasons": [
+        "Low Out-Of-Sample profit factor (0.8 < 1.15)"
+      ]
+    },
+    {
+      "strategy": "VolumeConfirmedBreakout(lookback=20, volume_factor=2.0, exit_ema=20)",
+      "family": "VolumeConfirmedBreakout",
+      "in_sample": {
+        "sharpe_ratio": -1.85
+      },
+      "out_of_sample": {
+        "cagr": -0.0077,
+        "total_return": -0.0116,
+        "sharpe_ratio": -1.61,
+        "sortino_ratio": -0.48,
+        "calmar_ratio": -0.18,
+        "max_drawdown": 0.0698,
+        "profit_factor": 0.97,
+        "win_rate": 0.1458,
+        "trade_count": 13,
+        "expectancy": -0.0169
+      },
+      "sharpe_degradation": 1.0,
+      "monte_carlo": {
+        "p50_max_dd": 0.1374,
+        "p95_max_dd": 0.2635,
+        "p99_max_dd": 0.3179,
+        "risk_of_ruin_pct": 0.0
+      },
+      "composite_score": 9.86,
+      "rejection_reasons": [
+        "Low Out-Of-Sample profit factor (0.97 < 1.15)"
+      ]
+    },
+    {
+      "strategy": "BollingerMeanReversion(bb_period=20, num_std=2.5, rsi_entry=30.0, rsi_exit=55.0)",
+      "family": "BollingerMeanReversion",
+      "in_sample": {
+        "sharpe_ratio": -0.68
+      },
+      "out_of_sample": {
+        "cagr": 0.0186,
+        "total_return": 0.0279,
+        "sharpe_ratio": -0.59,
+        "sortino_ratio": -0.3,
+        "calmar_ratio": 0.3,
+        "max_drawdown": 0.0622,
+        "profit_factor": 2.64,
+        "win_rate": 0.5,
+        "trade_count": 2,
+        "expectancy": 0.015
+      },
+      "sharpe_degradation": 1.0,
+      "monte_carlo": {
+        "p50_max_dd": 0.0,
+        "p95_max_dd": 0.0,
+        "p99_max_dd": 0.0,
+        "risk_of_ruin_pct": 0.0
+      },
+      "composite_score": 33.03,
+      "rejection_reasons": [
+        "Insufficient trade count (2 < 8)"
+      ]
+    },
+    {
+      "strategy": "VCPRocketStrategy(atr_fast=10, atr_slow=30, vol_mult=1.8, stop_loss_pct=0.08)",
+      "family": "VCPRocketStrategy",
+      "in_sample": {
+        "sharpe_ratio": -1.6
+      },
+      "out_of_sample": {
+        "cagr": 0.0105,
+        "total_return": 0.0158,
+        "sharpe_ratio": -1.39,
+        "sortino_ratio": -0.94,
+        "calmar_ratio": 0.09,
+        "max_drawdown": 0.0598,
+        "profit_factor": 49.5,
+        "win_rate": 0.5,
+        "trade_count": 5,
+        "expectancy": 0.015
+      },
+      "sharpe_degradation": 1.0,
+      "monte_carlo": {
+        "p50_max_dd": 0.0508,
+        "p95_max_dd": 0.1195,
+        "p99_max_dd": 0.1474,
+        "risk_of_ruin_pct": 0.0
+      },
+      "composite_score": 40.87,
+      "rejection_reasons": [
+        "Insufficient trade count (5 < 8)"
+      ]
+    },
+    {
+      "strategy": "VCPRocketStrategy(atr_fast=7, atr_slow=21, vol_mult=2.0, stop_loss_pct=0.07)",
+      "family": "VCPRocketStrategy",
+      "in_sample": {
+        "sharpe_ratio": -1.49
+      },
+      "out_of_sample": {
+        "cagr": 0.0064,
+        "total_return": 0.0095,
+        "sharpe_ratio": -1.29,
+        "sortino_ratio": -0.9,
+        "calmar_ratio": 0.06,
+        "max_drawdown": 0.0603,
+        "profit_factor": 40.37,
+        "win_rate": 0.5,
+        "trade_count": 7,
+        "expectancy": 0.015
+      },
+      "sharpe_degradation": 1.0,
+      "monte_carlo": {
+        "p50_max_dd": 0.0602,
+        "p95_max_dd": 0.1367,
+        "p99_max_dd": 0.1775,
+        "risk_of_ruin_pct": 0.0
+      },
+      "composite_score": 40.73,
+      "rejection_reasons": [
+        "Insufficient trade count (7 < 8)"
+      ]
+    }
+  ],
+  "live_signals": [
+    {
+      "symbol": "HDFCBANK",
+      "timestamp": "2026-11-17 10:26:32",
+      "strategy": "52W_High_Volume_Breakout",
+      "ltp": 3592.91,
+      "entry_range": "3574.95 - 3610.87",
+      "stop_loss": 3377.34,
+      "target_1": 3844.41,
+      "target_2": 4131.85,
+      "risk_reward": "1 : 1.17",
+      "volume_ratio": "2.13x",
+      "distance_52w": "4.73%",
+      "signal_strength": "STRONG BUY"
+    },
+    {
+      "symbol": "ONGC",
+      "timestamp": "2026-11-17 10:26:32",
+      "strategy": "Dual_EMA_Pullback_Retest",
+      "ltp": 1193.42,
+      "entry_range": "1187.45 - 1199.39",
+      "stop_loss": 1083.19,
+      "target_1": 1265.03,
+      "target_2": 1336.63,
+      "risk_reward": "1 : 0.65",
+      "volume_ratio": "0.48x (Dry-up)",
+      "distance_52w": "4.17%",
+      "signal_strength": "LOW-RISK SWING ENTRY"
+    },
+    {
+      "symbol": "KOTAKBANK",
+      "timestamp": "2026-11-17 10:26:32",
+      "strategy": "52W_High_Volume_Breakout",
+      "ltp": 1785.6,
+      "entry_range": "1776.67 - 1794.53",
+      "stop_loss": 1678.46,
+      "target_1": 1910.59,
+      "target_2": 2053.44,
+      "risk_reward": "1 : 1.17",
+      "volume_ratio": "3.0x",
+      "distance_52w": "4.12%",
+      "signal_strength": "STRONG BUY"
+    },
+    {
+      "symbol": "BEML",
+      "timestamp": "2026-11-17 10:26:32",
+      "strategy": "Dual_EMA_Pullback_Retest",
+      "ltp": 5134.54,
+      "entry_range": "5108.87 - 5160.21",
+      "stop_loss": 4839.47,
+      "target_1": 5442.61,
+      "target_2": 5750.68,
+      "risk_reward": "1 : 1.04",
+      "volume_ratio": "0.74x (Dry-up)",
+      "distance_52w": "5.8%",
+      "signal_strength": "LOW-RISK SWING ENTRY"
+    },
+    {
+      "symbol": "POLYCAB",
+      "timestamp": "2026-11-17 10:26:32",
+      "strategy": "Dual_EMA_Pullback_Retest",
+      "ltp": 16535.83,
+      "entry_range": "16453.15 - 16618.51",
+      "stop_loss": 15832.1,
+      "target_1": 17527.98,
+      "target_2": 18520.13,
+      "risk_reward": "1 : 1.41",
+      "volume_ratio": "0.34x (Dry-up)",
+      "distance_52w": "14.31%",
+      "signal_strength": "LOW-RISK SWING ENTRY"
+    }
+  ],
+  "paper_trading": {
+    "initial_cash": 1000000.0,
+    "available_cash": 507172.73,
+    "invested_cash": 492827.27,
+    "portfolio_value": 1000000.0,
+    "unrealized_pnl": 0.0,
+    "open_count": 5,
+    "closed_count": 0
+  }
+}

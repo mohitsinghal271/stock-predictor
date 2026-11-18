@@ -1,0 +1,72 @@
+{
+  "initial_cash": 1000000.0,
+  "available_cash": 507172.73,
+  "active_positions": [
+    {
+      "id": "PT-20261117102632-HDFCBANK",
+      "symbol": "HDFCBANK",
+      "strategy": "52W_High_Volume_Breakout",
+      "entry_time": "2026-11-17 10:26:32",
+      "entry_price": 3592.91,
+      "shares": 27,
+      "cost_basis": 97008.57,
+      "stop_loss": 3377.34,
+      "target_1": 3844.41,
+      "target_2": 4131.85,
+      "status": "OPEN"
+    },
+    {
+      "id": "PT-20261117102632-ONGC",
+      "symbol": "ONGC",
+      "strategy": "Dual_EMA_Pullback_Retest",
+      "entry_time": "2026-11-17 10:26:32",
+      "entry_price": 1193.42,
+      "shares": 83,
+      "cost_basis": 99053.86,
+      "stop_loss": 1083.19,
+      "target_1": 1265.03,
+      "target_2": 1336.63,
+      "status": "OPEN"
+    },
+    {
+      "id": "PT-20261117102632-KOTAKBANK",
+      "symbol": "KOTAKBANK",
+      "strategy": "52W_High_Volume_Breakout",
+      "entry_time": "2026-11-17 10:26:32",
+      "entry_price": 1785.6,
+      "shares": 56,
+      "cost_basis": 99993.6,
+      "stop_loss": 1678.46,
+      "target_1": 1910.59,
+      "target_2": 2053.44,
+      "status": "OPEN"
+    },
+    {
+      "id": "PT-20261117102632-BEML",
+      "symbol": "BEML",
+      "strategy": "Dual_EMA_Pullback_Retest",
+      "entry_time": "2026-11-17 10:26:32",
+      "entry_price": 5134.54,
+      "shares": 19,
+      "cost_basis": 97556.26,
+      "stop_loss": 4839.47,
+      "target_1": 5442.61,
+      "target_2": 5750.68,
+      "status": "OPEN"
+    },
+    {
+      "id": "PT-20261117102632-POLYCAB",
+      "symbol": "POLYCAB",
+      "strategy": "Dual_EMA_Pullback_Retest",
+      "entry_time": "2026-11-17 10:26:32",
+      "entry_price": 16535.83,
+      "shares": 6,
+      "cost_basis": 99214.98,
+      "stop_loss": 15832.1,
+      "target_1": 17527.98,
+      "target_2": 18520.13,
+      "status": "OPEN"
+    }
+  ],
+  "closed_trades": []
+}

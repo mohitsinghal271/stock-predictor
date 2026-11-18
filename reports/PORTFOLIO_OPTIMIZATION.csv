@@ -1,0 +1,5 @@
+Portfolio_Configuration,CAGR_Pct,Sharpe,MaxDD_Pct
+Standalone Intraday (500k),4.22,-1.69,2.3
+Standalone Swing (500k),181.26,3.73,21.92
+Standalone Positional (500k),54.4,2.52,10.72
+Combined Shared Portfolio (500k),2.4,-1.08,6.31

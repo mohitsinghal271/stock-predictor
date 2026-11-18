@@ -1,0 +1,6 @@
+Strategy,Style,CAGR_Pct,Sharpe,Sortino,MaxDD_Pct,Profit_Factor,Win_Rate_Pct,Trade_Count,P95_Monte_Carlo_DD,Audit_Status
+"DualEMAMomentum(fast_span=20, slow_span=50, trend_span=200)",SWING,181.26,3.73,28.74,21.92,2.85,32.51,323,78.31,VERIFIED
+"DualEMAMomentum(fast_span=10, slow_span=30, trend_span=0)",SWING,117.08,3.68,18.86,15.15,2.45,39.86,429,71.11,VERIFIED
+"DonchianBreakout(entry_period=20, exit_period=10)",SWING,113.04,4.28,24.08,10.03,2.2,40.93,386,69.17,VERIFIED
+"VolumeConfirmedBreakout(lookback=20, volume_factor=1.75, exit_ema=20)",SWING,170.93,6.14,31.99,7.84,2.42,44.52,155,50.67,VERIFIED
+"VCPRocketStrategy(atr_fast=10, atr_slow=30, vol_mult=1.8, stop_loss_pct=0.08)",SWING,449.56,12.6,89.2,3.5,3.99,50.0,58,30.26,VERIFIED

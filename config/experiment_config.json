@@ -1,0 +1,124 @@
+{
+  "experiment_id": "EXP-NSE-2026-001",
+  "name": "Phase 14 Autonomous 30-Session Live NSE Paper Trading & Strategy Validation",
+  "created_at_utc": "2026-11-18T12:45:00Z",
+  "created_at_ist": "2026-11-18 18:15:00 IST",
+  "total_planned_sessions": 30,
+  "real_money_trading": false,
+  "broker_integration_enabled": false,
+  "capital_rules": {
+    "initial_capital_per_portfolio_inr": 500000.0,
+    "max_risk_per_trade_pct": 0.01,
+    "max_risk_amount_inr": 5000.0,
+    "max_portfolio_open_risk_pct": 0.03,
+    "max_portfolio_open_risk_inr": 15000.0,
+    "max_sector_exposure_pct": 0.30,
+    "max_sector_exposure_inr": 150000.0,
+    "max_capital_deployment_pct": 0.80,
+    "max_capital_deployment_inr": 400000.0,
+    "max_concurrent_positions": 5,
+    "cash_safety_buffer_pct": 0.20
+  },
+  "portfolios": {
+    "PORTFOLIO_A_INTRADAY": {
+      "name": "Track A: Independent Intraday Portfolio",
+      "style": "INTRADAY",
+      "capital_inr": 500000.0,
+      "holding_period": "0 days (Intraday only)",
+      "timeframes": ["5m", "15m"],
+      "market_hours": {
+        "session_start_ist": "09:15:00",
+        "entry_cutoff_ist": "14:30:00",
+        "mandatory_square_off_ist": "15:15:00",
+        "session_end_ist": "15:30:00"
+      },
+      "overnight_holding_allowed": false,
+      "active_strategies": [
+        {
+          "strategy_id": "INTRADAY_ORB_ATR10",
+          "name": "Intraday Opening Range Breakout (ATR=1.0)",
+          "params": {"opening_range_mins": 15, "atr_multiplier": 1.0, "risk_reward": 2.0}
+        },
+        {
+          "strategy_id": "INTRADAY_ORB_ATR15",
+          "name": "Intraday Opening Range Breakout (ATR=1.5)",
+          "params": {"opening_range_mins": 15, "atr_multiplier": 1.5, "risk_reward": 2.0}
+        }
+      ]
+    },
+    "PORTFOLIO_B_SWING": {
+      "name": "Track B: Independent Swing Portfolio",
+      "style": "SWING",
+      "capital_inr": 500000.0,
+      "holding_period": "2 to 20 trading days",
+      "timeframes": ["Daily", "Weekly confirmation"],
+      "overnight_holding_allowed": true,
+      "active_strategies": [
+        {
+          "strategy_id": "SWING_DUAL_EMA_20_50",
+          "name": "Dual EMA Momentum with Trend Filter",
+          "params": {"fast_span": 20, "slow_span": 50, "trend_span": 200, "stop_loss_pct": 0.05}
+        },
+        {
+          "strategy_id": "SWING_52W_HIGH_BREAKOUT",
+          "name": "52-Week High Momentum Breakout",
+          "params": {"lookback_days": 252, "proximity_pct": 0.01, "stop_loss_pct": 0.05, "target_mult": 2.0}
+        },
+        {
+          "strategy_id": "SWING_VOL_BREAKOUT",
+          "name": "Volume Confirmed Breakout",
+          "params": {"lookback": 20, "volume_factor": 1.75, "exit_ema": 20}
+        }
+      ]
+    },
+    "PORTFOLIO_C_POSITIONAL": {
+      "name": "Track C: Independent Positional Portfolio",
+      "style": "POSITIONAL",
+      "capital_inr": 500000.0,
+      "holding_period": "20 to 120 trading days",
+      "timeframes": ["Daily", "Weekly"],
+      "overnight_holding_allowed": true,
+      "active_strategies": [
+        {
+          "strategy_id": "POS_DUAL_EMA_50_100",
+          "name": "Dual EMA Positional Macro Trend",
+          "params": {"fast_span": 50, "slow_span": 100, "trend_span": 200, "stop_loss_pct": 0.05}
+        },
+        {
+          "strategy_id": "POS_DONCHIAN_50_20",
+          "name": "Donchian Positional Channel Breakout",
+          "params": {"entry_period": 50, "exit_period": 20}
+        }
+      ]
+    },
+    "PORTFOLIO_D_COMBINED": {
+      "name": "Mode 2: Combined Multi-Style Shared Portfolio",
+      "style": "COMBINED",
+      "capital_inr": 500000.0,
+      "shared_pool": true,
+      "max_concurrent_positions": 5,
+      "max_sector_exposure_pct": 0.30,
+      "max_portfolio_risk_pct": 0.03,
+      "allocation_policy": "Priority by risk-adjusted score, subject to 30% sector limit and 3% risk cap"
+    }
+  },
+  "execution_model": {
+    "standard_slippage_pct": 0.0010,
+    "brokerage_pct": 0.0003,
+    "brokerage_max_inr": 20.0,
+    "stt_delivery_buy_pct": 0.0010,
+    "stt_delivery_sell_pct": 0.0010,
+    "stt_intraday_sell_pct": 0.00025,
+    "exchange_turnover_pct": 0.0000325,
+    "sebi_turnover_pct": 0.000001,
+    "stamp_duty_buy_pct": 0.00015,
+    "gst_pct": 0.18
+  },
+  "universe": [
+    "RELIANCE", "TCS", "HDFCBANK", "ICICIBANK", "INFY", "BHARTIARTL", "SBIN",
+    "LICI", "ITC", "HINDUNILVR", "LT", "BAJFINANCE", "HCLTECH", "MARUTI",
+    "SUNPHARMA", "ONGC", "TATAMOTORS", "NTPC", "KOTAKBANK", "TITAN",
+    "BSE", "CDSL", "CAMS", "DIXON", "BEML", "MIDHANI", "BDL", "PNB", "IREDA",
+    "POLYCAB", "POWERINDIA", "HAL", "BEL", "TRENT", "CHOLAFIN", "MCX"
+  ]
+}

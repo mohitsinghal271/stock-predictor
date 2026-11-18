@@ -1,0 +1,63 @@
+name: NSE Autonomous 30-Session Paper Trading Worker
+
+on:
+  schedule:
+    # 03:15 UTC = 08:45 AM IST (Pre-market scan / session initialization)
+    # 10:15 UTC = 03:45 PM IST (Post-market execution, mark-to-market & daily reporting)
+    - cron: '15 3,10 * * 1-5'
+  workflow_dispatch:
+    inputs:
+      force_session:
+        description: 'Force execution even if outside normal hours (true/false)'
+        required: false
+        default: 'false'
+
+permissions:
+  contents: write
+
+jobs:
+  run-paper-session:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Set up Python 3.12
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+        cache: 'pip'
+
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run NSE Autonomous Paper Trading Session
+      env:
+        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        ALERT_WEBHOOK_URL: ${{ secrets.ALERT_WEBHOOK_URL }}
+      run: |
+        python -c "
+        import os
+        from src.engine.session_manager import PaperTradingSessionManager
+        mgr = PaperTradingSessionManager()
+        res = mgr.execute_daily_session()
+        print('Session result:', res)
+        "
+
+    - name: Commit and Push Updated Ledgers & Reports
+      run: |
+        git config --global user.name "NSE Autonomous Quant Worker"
+        git config --global user.email "worker@antigravity.quant"
+        git add reports/paper_trading/ data_store/research_store.db
+        if git diff --staged --quiet; then
+          echo "No changes in ledgers or reports to commit."
+        else
+          git commit -m "chore(paper-trading): auto-record session report and ledgers [skip ci]"
+          git push
+        fi

@@ -1,0 +1,4 @@
+Symbol,Sector,Decision,LTP_INR,Stop_Loss_INR,Target_1_INR,Verified_Shares,Allocated_Capital_INR,Planned_Rupee_Risk_INR,Round_Trip_Friction_INR,Sector_Exposure_INR,Sector_Exposure_Pct,Portfolio_Risk_Pct,Strategy,Audit_Verdict
+KOTAKBANK,Financials,APPROVED,496.4,471.58,531.15,201,99776.4,4988.82,483.37,99776.4,19.96,1.0,52W_High_Breakout,COMPLIANT_WITH_ALL_CAPS
+BEML,Defense_Rail,APPROVED,2087.0,1982.65,2233.09,47,98089.0,4904.45,475.99,98089.0,19.62,1.98,Dual_EMA_Pullback_Retest,COMPLIANT_WITH_ALL_CAPS
+HDFCBANK,Financials,APPROVED (RESIZED),818.0,777.1,875.26,61,49898.0,2494.9,254.69,149674.4,29.93,2.48,Dual_EMA_Momentum,COMPLIANT_WITH_ALL_CAPS

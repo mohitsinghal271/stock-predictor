@@ -1,0 +1,2 @@
+Portfolio_Mode,Initial_Capital,Final_Equity,CAGR_Pct,Sharpe,Sortino,Max_Drawdown_Pct,Profit_Factor,Win_Rate_Pct,Closed_Trades,Max_Concurrent_Positions,Max_Open_Risk_Pct,Max_Sector_Exposure_Pct,Audit_Status
+Mode 2: Single Shared Capital Pool,500000.0,565405.29,2.4,-1.08,-1.46,6.31,3.18,36.36,22,5,3.0,30.0,VERIFIED

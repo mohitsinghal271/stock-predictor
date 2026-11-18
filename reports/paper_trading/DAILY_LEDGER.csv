@@ -1,0 +1,2 @@
+session_id,experiment_id,session_number,session_date,market_status,start_timestamp,end_timestamp,symbols_scanned,signals_generated,signals_rejected,orders_executed,open_positions_count,closed_positions_count,gross_pnl,net_pnl,transaction_costs,open_risk_inr,portfolio_equity,max_drawdown_pct,status
+SESSION_01_2026-11-18,EXP-NSE-2026-001,1,2026-11-18,NORMAL_MARKET,2026-11-18 09:15:00,2026-11-18 15:35:00,36,43,0,7,0,7,45142.04,43574.36,1567.69,0.0,516737.09,0.0,COMPLETED

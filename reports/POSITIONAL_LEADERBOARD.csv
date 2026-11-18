@@ -1,0 +1,5 @@
+Strategy,Style,CAGR_Pct,Sharpe,Sortino,MaxDD_Pct,Profit_Factor,Win_Rate_Pct,Trade_Count,P95_Monte_Carlo_DD,Audit_Status
+"DualEMAMomentum(fast_span=50, slow_span=100, trend_span=200)",POSITIONAL,54.4,2.52,12.05,10.72,2.01,37.9,562,79.4,VERIFIED
+"DualEMAMomentum(fast_span=50, slow_span=200, trend_span=200)",POSITIONAL,46.7,2.1,10.04,9.58,1.88,38.1,609,82.89,VERIFIED
+"DonchianBreakout(entry_period=50, exit_period=20)",POSITIONAL,83.14,3.42,17.98,8.72,2.21,39.82,329,74.11,VERIFIED
+"VolumeConfirmedBreakout(lookback=50, volume_factor=1.5, exit_ema=50)",POSITIONAL,89.69,3.8,20.94,8.75,2.15,40.84,191,67.51,VERIFIED

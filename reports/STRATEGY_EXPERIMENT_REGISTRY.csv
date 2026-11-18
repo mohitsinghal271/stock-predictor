@@ -1,0 +1,16 @@
+Experiment_ID,Style,Strategy,Trades,CAGR_Pct,Sharpe,MaxDD_Pct,PF
+EXP-INTRADAY-1.0,INTRADAY,Intraday_ORB_Breakout(ATR=1.0),10789,4.22,-1.69,2.3,1.56
+EXP-INTRADAY-1.5,INTRADAY,Intraday_ORB_Breakout(ATR=1.5),10792,4.54,-1.61,1.5599999999999998,1.7
+EXP-INTRADAY-2.0,INTRADAY,Intraday_ORB_Breakout(ATR=2.0),10792,4.5600000000000005,-1.62,1.54,1.71
+EXP-SWING-DualEMAMomentum,SWING,"DualEMAMomentum(fast_span=20, slow_span=50, trend_span=200)",323,181.26,3.73,21.92,2.85
+EXP-SWING-DualEMAMomentum,SWING,"DualEMAMomentum(fast_span=10, slow_span=30, trend_span=0)",429,117.08000000000001,3.68,15.15,2.45
+EXP-SWING-DonchianBreakout,SWING,"DonchianBreakout(entry_period=20, exit_period=10)",386,113.04,4.28,10.03,2.2
+EXP-SWING-VolumeConfirmedBreakout,SWING,"VolumeConfirmedBreakout(lookback=20, volume_factor=1.75, exit_ema=20)",155,170.93,6.14,7.84,2.42
+EXP-SWING-VCPRocketStrategy,SWING,"VCPRocketStrategy(atr_fast=10, atr_slow=30, vol_mult=1.8, stop_loss_pct=0.08)",58,449.55999999999995,12.6,3.5000000000000004,3.99
+EXP-SWING-RSIMomentumTrend,SWING,"RSIMomentumTrend(rsi_period=14, rsi_buy=55.0, rsi_sell=45.0, ema_trend=50)",599,64.83,2.49,12.36,1.86
+EXP-SWING-BollingerMeanReversion,SWING,"BollingerMeanReversion(bb_period=20, num_std=2.0, rsi_entry=35.0, rsi_exit=60.0)",366,2.11,-0.34,23.51,1.02
+EXP-POS-DualEMAMomentum,POSITIONAL,"DualEMAMomentum(fast_span=50, slow_span=100, trend_span=200)",562,54.400000000000006,2.52,10.72,2.01
+EXP-POS-DualEMAMomentum,POSITIONAL,"DualEMAMomentum(fast_span=50, slow_span=200, trend_span=200)",609,46.7,2.1,9.58,1.88
+EXP-POS-DonchianBreakout,POSITIONAL,"DonchianBreakout(entry_period=50, exit_period=20)",329,83.14,3.42,8.72,2.21
+EXP-POS-VolumeConfirmedBreakout,POSITIONAL,"VolumeConfirmedBreakout(lookback=50, volume_factor=1.5, exit_ema=50)",191,89.69,3.8,8.75,2.15
+EXP-POS-RSIMomentumTrend,POSITIONAL,"RSIMomentumTrend(rsi_period=14, rsi_buy=60.0, rsi_sell=40.0, ema_trend=100)",500,58.230000000000004,2.78,10.0,2.07

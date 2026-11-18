@@ -1,0 +1,6 @@
+Symbol,LTP_INR,Stop_Loss_INR,Risk_Per_Share_INR,Raw_Max_Qty_1Pct_Risk,Final_Constrained_Qty,Allocated_Capital_INR,Planned_Rupee_Risk_INR,Round_Trip_Friction_INR,Sector,Decision,Constraint_Explanation
+KOTAKBANK,496.4,471.58,24.82,201,201,99776.4,4988.82,483.37,Financials,APPROVED,OK
+BEML,2087.0,1982.65,104.35,47,47,98089.0,4904.45,475.99,Defense_Rail,APPROVED,OK
+HDFCBANK,818.0,777.1,40.9,122,122,99796.0,4989.8,483.45,Financials,APPROVED,OK
+ONGC,224.55,213.32,11.23,445,0,0.0,0.0,0.0,Energy,REJECTED,Failing momentum; near 52W Low (Rs 218.53); down -1.08% today.
+POLYCAB,7808.5,7418.07,390.43,12,0,0.0,0.0,0.0,Capital_Goods,REJECTED,Consolidating below 20 EMA; down -1.92% today on supply overhead.

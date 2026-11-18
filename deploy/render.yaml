@@ -1,0 +1,37 @@
+services:
+  # 1. Persistent Background Research Worker (Runs 24/7 with Persistent Storage)
+  - type: worker
+    name: nse-quant-research-worker
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python src/scheduler/autonomous_worker.py
+    disk:
+      name: quant-data-worker
+      mountPath: /app/data_store
+      sizeGB: 1
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.0
+      - key: PYTHONUNBUFFERED
+        value: "1"
+      - key: MCP_BHAVCOPY_URL
+        value: https://mcp.nseindia.in/bhavcopy/cm/mcp
+      - key: MCP_MARKET_URL
+        value: https://mcp.nseindia.in/cmmkt/mcp
+
+  # 2. Web Dashboard & API (Public HTTPS URL with Health Checks)
+  - type: web
+    name: nse-quant-dashboard
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn src.dashboard.api:app --host 0.0.0.0 --port $PORT
+    disk:
+      name: quant-data-web
+      mountPath: /app/data_store
+      sizeGB: 1
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.0
+      - key: PYTHONUNBUFFERED
+        value: "1"

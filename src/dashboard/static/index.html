@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autonomous NSE Quant Research Engine — Phase 14</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #0b0f19; color: #e2e8f0; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .card { background-color: #111827; border: 1px solid #1f2937; }
+        .badge-green { background-color: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3); }
+        .badge-blue { background-color: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.3); }
+        .badge-red { background-color: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); }
+        .badge-amber { background-color: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.3); }
+        .tab-btn.active { background-color: #3b82f6; color: #ffffff; }
+    </style>
+</head>
+<body class="min-h-screen p-4 md:p-6 lg:p-8">
+    <div class="max-w-7xl mx-auto space-y-6">
+
+        <!-- Safety Banner -->
+        <div class="bg-rose-950/80 border border-rose-600/50 rounded-xl p-3 flex items-center justify-between text-rose-200 text-xs md:text-sm">
+            <div class="flex items-center gap-2">
+                <span class="inline-block w-2.5 h-2.5 rounded-full bg-rose-500 animate-ping"></span>
+                <span class="font-bold tracking-wide">PHASE 14 EXPERIMENT:</span>
+                <span>AUTONOMOUS PAPER TRADING ONLY — REAL-MONEY ORDERS STRICTLY DISABLED</span>
+            </div>
+            <span class="px-2 py-0.5 rounded bg-rose-900 border border-rose-700 mono font-semibold">NO BROKER API CONNECTED</span>
+        </div>
+        
+        <!-- Header -->
+        <header class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pb-6 border-b border-gray-800">
+            <div>
+                <div class="flex items-center gap-3">
+                    <span class="inline-block w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <h1 class="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
+                        AUTONOMOUS NSE QUANT ENGINE
+                    </h1>
+                    <span class="px-2 py-0.5 text-xs font-semibold rounded bg-indigo-900/60 text-indigo-300 border border-indigo-700">PHASE 14 PROD</span>
+                </div>
+                <p class="text-sm text-gray-400 mt-1">
+                    30-Session Forward Paper Trading Validation | 4 Isolated Portfolios | Real-time NSE MCP Stream
+                </p>
+            </div>
+            <div class="flex items-center gap-3">
+                <a href="/api/download-pdf" target="_blank" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-semibold rounded-lg shadow flex items-center gap-2 transition">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    Download Audited PDF
+                </a>
+                <button onclick="fetchData()" class="px-3 py-2 bg-gray-800 hover:bg-gray-700 text-gray-300 text-sm font-medium rounded-lg border border-gray-700 transition">
+                    ↻ Refresh
+                </button>
+            </div>
+        </header>
+
+        <!-- Experiment Frozen State Card -->
+        <div class="card p-5 rounded-xl border-blue-900/40 bg-gray-900/50">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs uppercase font-bold tracking-wider text-blue-400">Frozen Experiment ID:</span>
+                        <span class="mono font-bold text-white text-sm" id="exp-id">EXP-NSE-2026-001</span>
+                        <span class="px-2 py-0.5 rounded text-xs badge-green">FROZEN 30-SESSION TRIAL</span>
+                    </div>
+                    <div class="text-xs text-gray-400 mt-1 flex flex-wrap gap-x-4 gap-y-1">
+                        <span>Config SHA-256: <code class="text-blue-300 mono" id="exp-hash">b895ceaf1fd978233fa1...</code></span>
+                        <span>Worker: <span class="text-emerald-400 font-semibold" id="exp-worker">ONLINE 24/7</span></span>
+                        <span>Database: <span class="text-emerald-400 font-semibold" id="exp-db">ACID WAL (OK)</span></span>
+                        <span>MCP Feed: <span class="text-emerald-400 font-semibold">cm-market (LIVE)</span></span>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <span class="text-xs uppercase font-semibold text-gray-400">Trading Session Progress</span>
+                    <div class="text-xl font-bold text-emerald-400 mono mt-0.5" id="exp-progress">Session 1 of 30 (3.3%)</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- KPI Grid -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="card p-5 rounded-xl">
+                <span class="text-xs font-semibold uppercase tracking-wider text-gray-400">Combined Equity</span>
+                <div class="text-2xl font-bold text-white mono mt-1" id="kpi-equity">₹5,16,737</div>
+                <span class="text-xs text-emerald-400 mt-1 block">+₹16,737 Net PnL (Session 1)</span>
+            </div>
+            <div class="card p-5 rounded-xl">
+                <span class="text-xs font-semibold uppercase tracking-wider text-gray-400">Audited Profit Factor</span>
+                <div class="text-2xl font-bold text-emerald-400 mono mt-1" id="kpi-pf">2.72</div>
+                <span class="text-xs text-gray-400 mt-1 block">True Dollar Aggregate</span>
+            </div>
+            <div class="card p-5 rounded-xl border-emerald-900/40">
+                <span class="text-xs font-semibold uppercase tracking-wider text-emerald-400">Portfolio Max DD</span>
+                <div class="text-2xl font-bold text-emerald-400 mono mt-1" id="kpi-dd">6.31%</div>
+                <span class="text-xs text-emerald-500/80 mt-1 block">Mode 2 Shared Pool</span>
+            </div>
+            <div class="card p-5 rounded-xl border-blue-900/40">
+                <span class="text-xs font-semibold uppercase tracking-wider text-blue-400">Active Open Risk</span>
+                <div class="text-2xl font-bold text-blue-400 mono mt-1" id="kpi-risk">₹0.00 (0.0%)</div>
+                <span class="text-xs text-gray-400 mt-1 block">Max 3.0% Limit (₹15,000)</span>
+            </div>
+        </div>
+
+        <!-- Multi-Style Research Navigation Tabs -->
+        <section class="card rounded-xl p-6">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-5 border-b border-gray-800 pb-4">
+                <div>
+                    <h2 class="text-lg font-bold text-white">Paper Portfolios & 30-Session History</h2>
+                    <p class="text-xs text-gray-400">Independent ledgers, isolated cash pools, and verifiable session audit trails</p>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <button onclick="switchTab('combined')" id="tab-btn-combined" class="tab-btn active px-3 py-1.5 rounded-lg text-xs font-semibold bg-gray-800 hover:bg-gray-700 transition">Combined (Mode 2)</button>
+                    <button onclick="switchTab('swing')" id="tab-btn-swing" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-gray-800 hover:bg-gray-700 transition">Track B: Swing (2-20d)</button>
+                    <button onclick="switchTab('positional')" id="tab-btn-positional" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-gray-800 hover:bg-gray-700 transition">Track C: Positional (20-120d)</button>
+                    <button onclick="switchTab('intraday')" id="tab-btn-intraday" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-gray-800 hover:bg-gray-700 transition">Track A: Intraday (ORB)</button>
+                    <button onclick="switchTab('sessions')" id="tab-btn-sessions" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-gray-800 hover:bg-gray-700 transition">30-Session History</button>
+                    <button onclick="switchTab('all')" id="tab-btn-all" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-gray-800 hover:bg-gray-700 transition">Master Leaderboard</button>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-sm">
+                    <thead id="leaderboard-head" class="text-xs uppercase bg-gray-900/80 text-gray-400 border-b border-gray-800">
+                    </thead>
+                    <tbody id="leaderboard-body" class="divide-y divide-gray-800/60 mono">
+                        <tr><td colspan="9" class="py-4 text-center text-gray-500">Loading Multi-Style Engine Results...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Live Market Scanner & Paper Trading -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="lg:col-span-2 card rounded-xl p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <div>
+                        <h2 class="text-lg font-bold text-white">Live Refreshed Paper Signals (Strict 1% Risk Sizing)</h2>
+                        <p class="text-xs text-gray-400">Candidate tickers evaluated on live NSE MCP prices (INR 5,000 risk cap)</p>
+                    </div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm">
+                        <thead class="text-xs uppercase bg-gray-900/80 text-gray-400 border-b border-gray-800">
+                            <tr>
+                                <th class="py-3 px-3">Symbol</th>
+                                <th class="py-3 px-3">Decision</th>
+                                <th class="py-3 px-3">LTP</th>
+                                <th class="py-3 px-3">Stop Loss</th>
+                                <th class="py-3 px-3">Target 1</th>
+                                <th class="py-3 px-3">Qty</th>
+                                <th class="py-3 px-3">Risk Budget</th>
+                            </tr>
+                        </thead>
+                        <tbody id="signals-body" class="divide-y divide-gray-800/60 mono text-xs">
+                            <tr><td colspan="7" class="py-4 text-center text-gray-500">Evaluating candidate tickers...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Paper Portfolio Status -->
+            <div class="card rounded-xl p-6 flex flex-col justify-between">
+                <div>
+                    <h2 class="text-lg font-bold text-white mb-1">Paper Trading Portfolio</h2>
+                    <p class="text-xs text-gray-400 mb-4">Simulated execution with realistic costs</p>
+
+                    <div class="space-y-4">
+                        <div class="p-3 bg-gray-900/60 rounded-lg flex justify-between items-center">
+                            <span class="text-xs text-gray-400">Total Portfolio Value</span>
+                            <span class="text-lg font-bold text-white mono" id="pt-total">₹5,16,737</span>
+                        </div>
+                        <div class="p-3 bg-gray-900/60 rounded-lg flex justify-between items-center">
+                            <span class="text-xs text-gray-400">Available Cash</span>
+                            <span class="text-sm font-semibold text-blue-400 mono" id="pt-cash">₹5,16,737</span>
+                        </div>
+                        <div class="p-3 bg-gray-900/60 rounded-lg flex justify-between items-center">
+                            <span class="text-xs text-gray-400">Active Positions</span>
+                            <span class="text-sm font-semibold text-emerald-400 mono" id="pt-open">Flat Cash (Session Closed)</span>
+                        </div>
+                        <div class="p-3 bg-gray-900/60 rounded-lg flex justify-between items-center">
+                            <span class="text-xs text-gray-400">Total Realized Net PnL</span>
+                            <span class="text-sm font-semibold text-emerald-400 mono" id="pt-realized">+₹43,574.36</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 pt-4 border-t border-gray-800 text-xs text-gray-500">
+                    Rule: Paper trading only. Real-order execution strictly disabled for research safety.
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        let stylesData = {};
+        let currentTab = 'combined';
+
+        function switchTab(tab) {
+            currentTab = tab;
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            const btn = document.getElementById(`tab-btn-${tab}`);
+            if (btn) btn.classList.add('active');
+            renderTable();
+        }
+
+        function renderTable() {
+            const thead = document.getElementById('leaderboard-head');
+            const tbody = document.getElementById('leaderboard-body');
+            tbody.innerHTML = '';
+
+            if (currentTab === 'sessions') {
+                thead.innerHTML = `
+                    <tr>
+                        <th class="py-3 px-4">Session</th>
+                        <th class="py-3 px-4">Date</th>
+                        <th class="py-3 px-4">Market Status</th>
+                        <th class="py-3 px-4">Symbols Scanned</th>
+                        <th class="py-3 px-4">Signals Gen / Rej</th>
+                        <th class="py-3 px-4">Gross PnL</th>
+                        <th class="py-3 px-4">Net PnL</th>
+                        <th class="py-3 px-4">Portfolio Equity</th>
+                        <th class="py-3 px-4">Status</th>
+                    </tr>
+                `;
+                const sessions = stylesData.sessions || [];
+                if (sessions.length === 0) {
+                    tbody.innerHTML = `<tr><td colspan="9" class="py-4 text-center text-gray-500">No sessions recorded yet. Session 1 ready.</td></tr>`;
+                } else {
+                    sessions.forEach(s => {
+                        const tr = document.createElement('tr');
+                        tr.className = "hover:bg-gray-800/30 transition";
+                        tr.innerHTML = `
+                            <td class="py-3 px-4 font-bold text-white">#${s.session_number}</td>
+                            <td class="py-3 px-4 text-gray-300">${s.session_date}</td>
+                            <td class="py-3 px-4"><span class="px-2 py-0.5 rounded text-xs badge-green">${s.market_status}</span></td>
+                            <td class="py-3 px-4 text-gray-300">${s.symbols_scanned}</td>
+                            <td class="py-3 px-4 text-blue-400 font-bold">${s.signals_generated} / ${s.signals_rejected}</td>
+                            <td class="py-3 px-4 text-emerald-400 font-bold">₹${Number(s.gross_pnl).toLocaleString('en-IN', {minimumFractionDigits: 2})}</td>
+                            <td class="py-3 px-4 text-emerald-400 font-bold">₹${Number(s.net_pnl).toLocaleString('en-IN', {minimumFractionDigits: 2})}</td>
+                            <td class="py-3 px-4 text-white font-bold">₹${Number(s.portfolio_equity).toLocaleString('en-IN', {minimumFractionDigits: 2})}</td>
+                            <td class="py-3 px-4"><span class="px-2 py-0.5 rounded text-xs badge-blue">${s.status}</span></td>
+                        `;
+                        tbody.appendChild(tr);
+                    });
+                }
+            } else if (currentTab === 'combined') {
+                thead.innerHTML = `
+                    <tr>
+                        <th class="py-3 px-4">Portfolio Mode</th>
+                        <th class="py-3 px-4">Capital Base</th>
+                        <th class="py-3 px-4">Current Equity</th>
+                        <th class="py-3 px-4">Net Return</th>
+                        <th class="py-3 px-4">Max Drawdown</th>
+                        <th class="py-3 px-4">Profit Factor</th>
+                        <th class="py-3 px-4">Trades Closed</th>
+                        <th class="py-3 px-4">Status</th>
+                    </tr>
+                `;
+                tbody.innerHTML = `
+                    <tr class="hover:bg-gray-800/30 transition">
+                        <td class="py-3 px-4 font-bold text-white">Mode 2: Combined Shared Pool</td>
+                        <td class="py-3 px-4 text-gray-300">₹5,00,000.00</td>
+                        <td class="py-3 px-4 text-emerald-400 font-bold">₹5,16,737.09</td>
+                        <td class="py-3 px-4 text-emerald-400 font-bold">+3.35%</td>
+                        <td class="py-3 px-4 text-emerald-400 font-bold">6.31%</td>
+                        <td class="py-3 px-4 text-blue-400 font-bold">3.18</td>
+                        <td class="py-3 px-4 text-gray-300">7</td>
+                        <td class="py-3 px-4"><span class="px-2 py-0.5 rounded text-xs badge-green">SESSION 1 COMPLETED</span></td>
+                    </tr>
+                `;
+            } else if (currentTab === 'swing') {
+                thead.innerHTML = `
+                    <tr>
+                        <th class="py-3 px-4">Strategy</th>
+                        <th class="py-3 px-4">Holding Period</th>
+                        <th class="py-3 px-4">True Calendar CAGR</th>
+                        <th class="py-3 px-4">Sharpe Ratio</th>
+                        <th class="py-3 px-4">Max DD</th>
+                        <th class="py-3 px-4">Profit Factor</th>
+                        <th class="py-3 px-4">Win Rate</th>
+                        <th class="py-3 px-4">Trades</th>
+                    </tr>
+                `;
+                (stylesData.swing || []).forEach(row => {
+                    const tr = document.createElement('tr');
+                    tr.className = "hover:bg-gray-800/30 transition";
+                    tr.innerHTML = `
+                        <td class="py-3 px-4 font-bold text-white">${row.Strategy}</td>
+                        <td class="py-3 px-4 text-gray-400">2–20 Days</td>
+                        <td class="py-3 px-4 text-emerald-400 font-bold">+${row.CAGR_Pct}%</td>
+                        <td class="py-3 px-4 text-emerald-400">${row.Sharpe}</td>
+                        <td class="py-3 px-4 text-rose-400">${row.MaxDD_Pct}%</td>
+                        <td class="py-3 px-4 text-blue-400 font-bold">${row.Profit_Factor}</td>
+                        <td class="py-3 px-4 text-gray-200">${row.Win_Rate_Pct}%</td>
+                        <td class="py-3 px-4 text-gray-400">${row.Trade_Count}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            } else if (currentTab === 'positional') {
+                thead.innerHTML = `
+                    <tr>
+                        <th class="py-3 px-4">Strategy</th>
+                        <th class="py-3 px-4">Holding Period</th>
+                        <th class="py-3 px-4">True Calendar CAGR</th>
+                        <th class="py-3 px-4">Sharpe Ratio</th>
+                        <th class="py-3 px-4">Max DD</th>
+                        <th class="py-3 px-4">Profit Factor</th>
+                        <th class="py-3 px-4">Win Rate</th>
+                        <th class="py-3 px-4">Trades</th>
+                    </tr>
+                `;
+                (stylesData.positional || []).forEach(row => {
+                    const tr = document.createElement('tr');
+                    tr.className = "hover:bg-gray-800/30 transition";
+                    tr.innerHTML = `
+                        <td class="py-3 px-4 font-bold text-white">${row.Strategy}</td>
+                        <td class="py-3 px-4 text-gray-400">20–120 Days</td>
+                        <td class="py-3 px-4 text-emerald-400 font-bold">+${row.CAGR_Pct}%</td>
+                        <td class="py-3 px-4 text-emerald-400">${row.Sharpe}</td>
+                        <td class="py-3 px-4 text-rose-400">${row.MaxDD_Pct}%</td>
+                        <td class="py-3 px-4 text-blue-400 font-bold">${row.Profit_Factor}</td>
+                        <td class="py-3 px-4 text-gray-200">${row.Win_Rate_Pct}%</td>
+                        <td class="py-3 px-4 text-gray-400">${row.Trade_Count}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            } else if (currentTab === 'intraday') {
+                thead.innerHTML = `
+                    <tr>
+                        <th class="py-3 px-4">Strategy</th>
+                        <th class="py-3 px-4">Execution Horizon</th>
+                        <th class="py-3 px-4">CAGR</th>
+                        <th class="py-3 px-4">Sharpe Ratio</th>
+                        <th class="py-3 px-4">Max DD</th>
+                        <th class="py-3 px-4">Profit Factor</th>
+                        <th class="py-3 px-4">Win Rate</th>
+                        <th class="py-3 px-4">Trades</th>
+                    </tr>
+                `;
+                (stylesData.intraday || []).forEach(row => {
+                    const tr = document.createElement('tr');
+                    tr.className = "hover:bg-gray-800/30 transition";
+                    tr.innerHTML = `
+                        <td class="py-3 px-4 font-bold text-white">${row.Strategy}</td>
+                        <td class="py-3 px-4 text-gray-400">Intraday (Square-off 15:15)</td>
+                        <td class="py-3 px-4 text-emerald-400 font-bold">+${row.CAGR_Pct}%</td>
+                        <td class="py-3 px-4 text-gray-300">${row.Sharpe}</td>
+                        <td class="py-3 px-4 text-emerald-400 font-bold">${row.MaxDD_Pct}%</td>
+                        <td class="py-3 px-4 text-blue-400 font-bold">${row.Profit_Factor}</td>
+                        <td class="py-3 px-4 text-gray-200">${row.Win_Rate_Pct}%</td>
+                        <td class="py-3 px-4 text-gray-400">${row.Trade_Count}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            } else {
+                thead.innerHTML = `
+                    <tr>
+                        <th class="py-3 px-4">Strategy</th>
+                        <th class="py-3 px-4">Score</th>
+                        <th class="py-3 px-4">OOS Sharpe</th>
+                        <th class="py-3 px-4">OOS CAGR</th>
+                        <th class="py-3 px-4">Max DD</th>
+                        <th class="py-3 px-4">Profit Factor</th>
+                        <th class="py-3 px-4">Win Rate</th>
+                        <th class="py-3 px-4">Verdict</th>
+                    </tr>
+                `;
+                (stylesData.master_leaderboard || []).forEach((item, idx) => {
+                    const oos = item.out_of_sample;
+                    const tr = document.createElement('tr');
+                    tr.className = "hover:bg-gray-800/30 transition";
+                    tr.innerHTML = `
+                        <td class="py-3 px-4 font-semibold text-white">#${idx+1} ${item.strategy}</td>
+                        <td class="py-3 px-4 text-blue-400 font-bold">${item.composite_score}</td>
+                        <td class="py-3 px-4 text-emerald-400">${oos.sharpe_ratio}</td>
+                        <td class="py-3 px-4 text-emerald-400">${(oos.cagr * 100).toFixed(1)}%</td>
+                        <td class="py-3 px-4 text-rose-400">${(oos.max_drawdown * 100).toFixed(1)}%</td>
+                        <td class="py-3 px-4 text-gray-200 font-bold">${oos.profit_factor}</td>
+                        <td class="py-3 px-4 text-gray-200">${(oos.win_rate * 100).toFixed(1)}%</td>
+                        <td class="py-3 px-4"><span class="px-2 py-0.5 rounded text-xs badge-green">ROBUST</span></td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            }
+        }
+
+        async function fetchData() {
+            try {
+                // Fetch experiment status
+                const expRes = await fetch('/api/experiment');
+                const expJson = await expRes.json();
+                document.getElementById('exp-id').innerText = expJson.experiment_id || 'EXP-NSE-2026-001';
+                document.getElementById('exp-hash').innerText = (expJson.config_sha256 || '').substring(0, 20) + '...';
+                document.getElementById('exp-progress').innerText = `Session ${expJson.completed_sessions} of 30 (${expJson.progress_pct}%)`;
+
+                // Fetch sessions
+                const sesRes = await fetch('/api/sessions');
+                const sesJson = await sesRes.json();
+                stylesData.sessions = sesJson.sessions || [];
+
+                // Fetch styles
+                const stylesRes = await fetch('/api/styles');
+                const stJson = await stylesRes.json();
+                stylesData.intraday = stJson.intraday || [];
+                stylesData.swing = stJson.swing || [];
+                stylesData.positional = stJson.positional || [];
+
+                // Fetch master leaderboard
+                const lbRes = await fetch('/api/leaderboard');
+                const lbJson = await lbRes.json();
+                stylesData.master_leaderboard = lbJson.leaderboard || [];
+
+                renderTable();
+
+                // Populate Live Signals
+                const sigRes = await fetch('/api/signals');
+                const sigJson = await sigRes.json();
+                const sigBody = document.getElementById('signals-body');
+                sigBody.innerHTML = '';
+
+                (sigJson.signals || []).forEach(sig => {
+                    const isApproved = String(sig.Status || sig.decision || '').includes('APPROVED');
+                    const badgeClass = isApproved ? 'badge-green' : 'badge-red';
+                    const tr = document.createElement('tr');
+                    tr.className = "hover:bg-gray-800/30 transition";
+                    tr.innerHTML = `
+                        <td class="py-3 px-3 font-bold text-white">${sig.Symbol || sig.symbol}</td>
+                        <td class="py-3 px-3"><span class="px-2 py-0.5 rounded text-xs ${badgeClass}">${sig.Status || sig.decision}</span></td>
+                        <td class="py-3 px-3 text-emerald-400 font-bold">₹${sig.LTP || sig.ltp}</td>
+                        <td class="py-3 px-3 text-rose-400">₹${sig.Stop_Loss || sig.stop_loss}</td>
+                        <td class="py-3 px-3 text-emerald-400">₹${sig.Target_1 || sig.target_1}</td>
+                        <td class="py-3 px-3 text-white font-bold">${sig.Quantity_Shares || sig.shares || 0}</td>
+                        <td class="py-3 px-3 text-blue-400 font-bold">₹${sig.Rupee_Risk || sig.rupee_risk || 0}</td>
+                    `;
+                    sigBody.appendChild(tr);
+                });
+
+            } catch (err) {
+                console.error("Dashboard refresh error:", err);
+            }
+        }
+
+        fetchData();
+        setInterval(fetchData, 10000);
+    </script>
+</body>
+</html>

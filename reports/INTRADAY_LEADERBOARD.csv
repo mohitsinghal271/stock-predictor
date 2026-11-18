@@ -1,0 +1,4 @@
+Strategy,Style,CAGR_Pct,Sharpe,Sortino,MaxDD_Pct,Profit_Factor,Win_Rate_Pct,Trade_Count,P95_Monte_Carlo_DD,Audit_Status
+Intraday_ORB(ATR=1.0),INTRADAY,4.22,-1.69,-2.99,2.3,1.56,52.67,10789,22.17,VERIFIED
+Intraday_ORB(ATR=1.5),INTRADAY,4.54,-1.61,-3.12,1.56,1.7,52.7,10792,18.08,VERIFIED
+Intraday_ORB(ATR=2.0),INTRADAY,4.56,-1.62,-3.2,1.54,1.71,52.71,10792,17.67,VERIFIED
