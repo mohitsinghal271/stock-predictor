@@ -41,6 +41,18 @@ jobs:
         TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
         TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         ALERT_WEBHOOK_URL: ${{ secrets.ALERT_WEBHOOK_URL }}
+        SMTP_HOST: ${{ secrets.SMTP_HOST }}
+        SMTP_PORT: ${{ secrets.SMTP_PORT }}
+        SMTP_USER: ${{ secrets.SMTP_USER }}
+        SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+        ALERT_EMAIL_TO: ${{ secrets.ALERT_EMAIL_TO }}
+        ALERT_EMAIL_FROM: ${{ secrets.ALERT_EMAIL_FROM }}
+        CALLMEBOT_PHONE: ${{ secrets.CALLMEBOT_PHONE }}
+        CALLMEBOT_API_KEY: ${{ secrets.CALLMEBOT_API_KEY }}
+        TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
+        TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
+        TWILIO_WHATSAPP_FROM: ${{ secrets.TWILIO_WHATSAPP_FROM }}
+        WHATSAPP_TO: ${{ secrets.WHATSAPP_TO }}
       run: |
         python -c "
         import os
