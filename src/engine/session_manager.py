@@ -13,7 +13,6 @@ from src.data.mcp_client import NSEDataClient
 from src.backtester.delivery_costs import DeliveryCostModel
 from src.backtester.intraday_costs import IntradayCostModel
 from src.risk.portfolio_validator import PortfolioRiskValidator
-from src.monitoring.alerts import alert_manager
 
 PAPER_DIR = REPORTS_DIR / "paper_trading"
 DAILY_DIR = PAPER_DIR / "daily"
@@ -272,7 +271,6 @@ class PaperTradingSessionManager:
                 INSERT INTO transactions (portfolio_id, symbol, action, shares, fill_price, realized_pnl, friction, timestamp, notes)
                 VALUES (?, ?, 'STOP_LOSS_EXIT', ?, ?, ?, ?, ?, 'Stop Loss Executed')
                 """, (pid, sym, qty, sl, net_realized, fric, end_ts))
-                alert_manager.alert_exit_hit(pid, sym, "STOP_LOSS", net_realized, sl)
 
             # Check target 1
             elif cur_px >= t1:
@@ -290,7 +288,6 @@ class PaperTradingSessionManager:
                 INSERT INTO transactions (portfolio_id, symbol, action, shares, fill_price, realized_pnl, friction, timestamp, notes)
                 VALUES (?, ?, 'TARGET_EXIT', ?, ?, ?, ?, ?, 'Target 1 Reached')
                 """, (pid, sym, qty, t1, net_realized, fric, end_ts))
-                alert_manager.alert_exit_hit(pid, sym, "TARGET_1", net_realized, t1)
             else:
                 # Mark to market
                 cur.execute("UPDATE positions SET current_price = ? WHERE position_id = ?", (cur_px, pos["position_id"]))
